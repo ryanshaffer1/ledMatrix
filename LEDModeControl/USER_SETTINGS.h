@@ -3,8 +3,8 @@
   #define usersettings_header
 
 // ---------------- WiFi Credentials ----------------
-  const char* ssid = "Lisan-Al-Gaib-5G";
-  const char* password = "Rotundis";
+  const char* ssid = "XX_YOUR_NETWORK_NAME_XX";
+  const char* password = "XX_YOUR_NETWORK_PASSWORD_XX";
 
 // ---------------- Domain Name ----------------
   const char* domain_name = "ledControl";
@@ -12,11 +12,11 @@
 // ---------------- API Keys ----------------
   // OpenWeather
   // Sign up for an account here: https://openweathermap.org/api. Then paste your API key below:
-  String openWeatherMapApiKey = "863302a2bf74bd059f22b0d257d5098d";
+  String openWeatherMapApiKey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
   
   // WMATA (Washington Metro Area Transit Authority, aka DC Metro)
   // Sign up for an account here: https://developer.wmata.com/
-  String wmataApiKey = "4dfc633551b9439594b4e08ded8a1716";
+  String wmataApiKey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
 
 // ---------------- API Settings ----------------
