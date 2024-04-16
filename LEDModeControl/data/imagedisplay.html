@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+    <header>
+        <title>Ryan's LED Controller</title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+        <h1><li class="logo">LED</li> Control Center</h1>
+
+    </header>
+    <body id = "imagedisplay" class="vsc-initialized">
+
+            <p>
+                <nav>
+                    <ul>
+                        <button class="menubutton" onclick="document.location='index.html'"> Time & Weather</button>
+                        <button class="menubutton" onclick="document.location='metrotracker.html'"> Metro Tracker</button>
+                        <button class="menubutton" onclick="document.location='textdisplay.html'"> Text Display</button>
+                        <button class="menubutton" onclick="document.location='fireplace.html'"> Fireplace</button>
+                        <button class="menubutton" onclick="document.location='musicvis.html'"> Music Vis</button>
+                        <button class="menubutton active" onclick="document.location='imagedisplay.html'"> Image Display</button>
+                        <button class="menubutton" onclick="document.location='groovy.html'"> Groovy</button>
+                    </ul>
+                </nav>
+
+            <p>
+                Draw Image
+                <label class="switch">
+                    <input id="imagetoggle" type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                Upload Image
+            </p>
+
+            <div id= "drawing-elements">
+                <div id="drawing-toolbar">
+                    <label for="pencolor">Pen Color</label>
+                    <input id="pencolor" name="pencolor" type="color" value="#ffffff">
+                    <button id="fillscreen">Fill Screen</button>
+                    <button id="clear">Clear</button>
+                </div>
+                <canvas  id="drawing-board"></canvas>
+
+                <form action = "/get" id="sendImage">
+                    <input type="text" name="ImageData" id="ImageData" class="hide">
+                    <input type="submit" value="Upload Image">
+                </form>
+            </div>
+
+            <div id="imageupload-elements" class="hide">
+                <input type="file" id="inp"><br>
+                <label for="image-canvas" id="canvasLabel" class="hide">Draw Square Region:</label><br>
+                <canvas id="image-canvas"></canvas>
+                <form action = "/get" id="sendImage-Upload">
+                    <input type="text" name="ImageData-Upload" id="ImageData-Upload" class="hide">
+                    <input type="submit" value="Upload Image">
+                </form>
+            </div>
+
+
+        <script src="main.js"></script>
+        <script src="draw_image.js"></script>
+        <script src="upload_image.js"></script>
+    </body>
+</html>

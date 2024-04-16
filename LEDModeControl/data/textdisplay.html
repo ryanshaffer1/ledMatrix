@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+    <header>
+        <title>Ryan's LED Controller</title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+        <h1><li class="logo">LED</li> Control Center</h1>
+
+    </header>
+    <body id="textdisplay" class="vsc-initialized">
+
+            <p>
+                <nav>
+                    <ul>
+                        <button class="menubutton" onclick="document.location='index.html'"> Time & Weather</button>
+                        <button class="menubutton" onclick="document.location='metrotracker.html'"> Metro Tracker</button>
+                        <button class="menubutton active" onclick="document.location='textdisplay.html'"> Text Display</button>
+                        <button class="menubutton" onclick="document.location='fireplace.html'"> Fireplace</button>
+                        <button class="menubutton" onclick="document.location='musicvis.html'"> Music Vis</button>
+                        <button class="menubutton" onclick="document.location='imagedisplay.html'"> Image Display</button>
+                        <button class="menubutton" onclick="document.location='groovy.html'"> Groovy</button>
+                    </ul>
+                </nav>
+            </p>
+
+            <p>
+                <form action="/get" class="textselector">
+                    Text to Display: <input type="text" name="FreeText" id="FreeText" value = "" required >
+                    <input type="submit" value="Display" id="textSubmit">
+                </form><br>
+            </p>
+
+
+        <script src="main.js"></script>
+    </body>
+</html>
