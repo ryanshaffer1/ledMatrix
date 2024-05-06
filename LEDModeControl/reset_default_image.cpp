@@ -30,7 +30,7 @@ void reset_default_image() {
   // Open the image file for writing
   File write_file = SPIFFS.open(image_filename, "w");
   if(!write_file){
-      Serial.println("Failed to open file for reading");
+      Serial.println("Failed to open file for writing");
       return;
   }
 

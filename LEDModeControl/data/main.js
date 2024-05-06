@@ -1,5 +1,58 @@
 // HEADER FOR EACH PAGE
 
+// SET MENU OF DISPLAY MODES
+// (Done using async fetch and .then. Structured differently from rest of main.js (which is largely synchronous))
+
+// Read the file linking all valid display modes to the corresponding menu button names and html files
+modesDict = new Map();
+fetch("all_display_modes.txt")
+  .then(res=> res.text())
+  .then(text => {
+    let table = text.split('\n').map((line)=>line.split('\t'));
+    modesDict = setDictionary(table,modesDict);
+  })
+  .then(readInMenu(modesDict)); // Create menu of user-selected display modes (subset of all valid modes)
+
+// Create dictionaries linking display modes (by their 5-letter names) to their "full names" and their html files
+function setDictionary(table,dict){
+  for (i = 1; i < table.length; i++){
+    let mode = table[i][1];
+    let name = table[i][2];
+    let html = table[i][4];
+    dict.set(mode,[name,html]);
+  }
+  return dict;
+}
+
+// Read list of menu buttons
+function readInMenu(modesDict){
+fetch("userConfig.txt")
+  .then(res => res.text())
+  .then(text => {
+    let modes = text.split('\n');
+    setMenu(modes,modesDict);
+  });
+}
+
+// Arrange menu buttons in order
+function setMenu(modes,modesDict){
+  menuUL = document.getElementById("menubuttons");
+  for (let i = 0; i < modes.length; i++){
+    let modeName = modes[i].substring(0,5);
+    if (modeName == "rsrvd") continue;
+    menuLink = modesDict.get(modeName)[1].trim();
+    button = document.createElement("button");
+    button.textContent = modesDict.get(modeName)[0].trim();
+    button.classList.add("menubutton");
+    // If body id is the same as the menuLink name (minus ".html"), set this menu button to class "active"
+    if (document.body.id == menuLink.substring(0,menuLink.length-5)){
+      button.classList.add("active");
+    }
+    button.setAttribute("onclick","document.location='" + menuLink + "'")
+    menuUL.appendChild(button);
+  }
+}
+
 
 // OPTIONS MENU
 function menuFunction(x) {

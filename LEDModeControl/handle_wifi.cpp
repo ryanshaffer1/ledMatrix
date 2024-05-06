@@ -28,8 +28,9 @@ extern bool game_mode;
 extern bool fire_stoked;
 extern String image_filename;
 extern bool updateImage;
-extern int display_mode;
-//extern FastLED_NeoMatrix *matrix;
+extern int display_mode_int;
+extern char display_modes[][6];
+extern int num_display_modes;
 
 // ---------------- Declare variables for functions below ----------------
 AsyncWebServer server(80); //Set web server port number to 80
@@ -85,54 +86,106 @@ void handle_wifi() {
   // HTML FILES
   // Send index.html (main web page) to client
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
-    display_mode = 0;
     request->send(SPIFFS,"/index.html");
   });
   server.on("/index.html", HTTP_GET, [](AsyncWebServerRequest *request){
-    display_mode = 0;
     request->send(SPIFFS,"/index.html");
+  });
+
+  // Send clock.html to client
+  server.on("/clock.html", HTTP_GET, [](AsyncWebServerRequest *request){
+    for(int i = 0; i<num_display_modes; i++){
+      if(!strcmp(display_modes[i],"clock")){
+        display_mode_int = i;
+      }
+    }
+    request->send(SPIFFS,"/clock.html");
   });
   
   // Send metrotracker.html to client
   server.on("/metrotracker.html", HTTP_GET, [](AsyncWebServerRequest *request){
-    display_mode = 1;
+    for(int i = 0; i<num_display_modes; i++){
+      if(!strcmp(display_modes[i],"metro")){
+        display_mode_int = i;
+      }
+    }
     request->send(SPIFFS,"/metrotracker.html");
   });
 
   // Send textdisplay.html to client
   server.on("/textdisplay.html", HTTP_GET, [](AsyncWebServerRequest *request){
-    display_mode = 2;
+    for(int i = 0; i<num_display_modes; i++){
+      if(!strcmp(display_modes[i],"text_")){
+        display_mode_int = i;
+      }
+    }
     request->send(SPIFFS,"/textdisplay.html");
   });
 
   // Send fireplace.html to client
   server.on("/fireplace.html", HTTP_GET, [](AsyncWebServerRequest *request){
-    display_mode = 3;
+    for(int i = 0; i<num_display_modes; i++){
+      if(!strcmp(display_modes[i],"firep")){
+        display_mode_int = i;
+      }
+    }
     request->send(SPIFFS,"/fireplace.html");
   });
   
   // Send musicvis.html to client
   server.on("/musicvis.html", HTTP_GET, [](AsyncWebServerRequest *request){
-    display_mode = 4;
+    for(int i = 0; i<num_display_modes; i++){
+      if(!strcmp(display_modes[i],"music")){
+        display_mode_int = i;
+      }
+    }
     request->send(SPIFFS,"/musicvis.html");
   });
   
   // Send imagedisplay.html to client
   server.on("/imagedisplay.html", HTTP_GET, [](AsyncWebServerRequest *request){
-    display_mode = 5;
+    for(int i = 0; i<num_display_modes; i++){
+      if(!strcmp(display_modes[i],"image")){
+        display_mode_int = i;
+      }
+    }
     request->send(SPIFFS,"/imagedisplay.html");
   });
   
   // Send groovy.html to client
   server.on("/groovy.html", HTTP_GET, [](AsyncWebServerRequest *request){
-    display_mode = 6;
+    for(int i = 0; i<num_display_modes; i++){
+      if(!strcmp(display_modes[i],"groov")){
+        display_mode_int = i;
+      }
+    }
     request->send(SPIFFS,"/groovy.html");
   });
+
+  // Send dvdbounce.html to client
+  server.on("/dvdbounce.html", HTTP_GET, [](AsyncWebServerRequest *request){
+    for(int i = 0; i<num_display_modes; i++){
+      if(!strcmp(display_modes[i],"bounc")){
+        display_mode_int = i;
+      }
+    }
+    request->send(SPIFFS,"/dvdbounce.html");
+  });  
   
   // HELPER FILES
-  // Sendlogo.png (site logo) to client
+  // Send logo.png (site logo) to client
   server.on("/logo.png", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/Logo.PNG", "image/png");
+  });
+  
+  // userConfig.txt (user configuration/settings) to client
+  server.on("/userConfig.txt", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/userConfig.txt", "text/plain");
+  });
+
+  // all_display_modes.txt (list of valid display modes) to client
+  server.on("/all_display_modes.txt", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/all_display_modes.txt", "text/plain");
   });
 
   // CSS

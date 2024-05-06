@@ -56,8 +56,8 @@ void plasma_gradient() {
   // ---------------- Setup ----------------
 
   // Manage display mode
-  extern int display_mode;
-  int og_display_mode = display_mode; // Keep track of what the mode number was that entered this mode (instead of hard-coding an int)
+  extern int display_mode_int;
+  int og_display_mode = display_mode_int; // Keep track of what the mode number was that entered this mode (instead of hard-coding an int)
 
   // ---------------- Variables used in function below ----------------
   const float radius1 =16.3, radius2 =23.0, radius3 =40.8, radius4 =44.2,
@@ -124,14 +124,14 @@ void plasma_gradient() {
   
     // ---------------- MODE MAINTENANCE/EVENT HANDLING ----------------    
     // If display mode is different from the og value or mode button is pressed, end the loop
-    if (display_mode != og_display_mode){
+    if (display_mode_int != og_display_mode){
       delay(100);
       matrix->fillScreen(LED_BLACK);
       matrix->show();
       return;      
     }
     else if (digitalRead(BUTTONPIN)) {
-      display_mode++;
+      display_mode_int++;
       while(digitalRead(BUTTONPIN)){}
       delay(100);
       matrix->fillScreen(LED_BLACK);

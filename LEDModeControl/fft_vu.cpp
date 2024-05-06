@@ -13,7 +13,7 @@
 // ---------------- Reference global variables declared elsewhere ----------------
 extern FastLED_NeoMatrix *matrix;
 
-// ---------------- Define variables for functions below ----------------
+// ---------------- Declare variables for functions below ----------------
 // Not great practice to use #define, but I stole this code from the internet and it works, so oh well
 #define SAMPLES         512          // Must be a power of 2
 #define SAMPLING_FREQ   10000         // Hz, must be 40000 or less due to ADC conversion time. Determines maximum frequency that can be analysed by the FFT Fmax=sampleF/2.
@@ -33,8 +33,8 @@ void fft_vu() {
   // ---------------- SETUP ----------------
 
   // Manage display mode
-  extern int display_mode;
-  int og_display_mode = display_mode; // Keep track of what the mode number was that entered this mode (instead of hard-coding an int)
+  extern int display_mode_int;
+  int og_display_mode = display_mode_int; // Keep track of what the mode number was that entered this mode (instead of hard-coding an int)
 
   // Set up sampling and FFT stuff
   unsigned int sampling_period_us = round(1000000 * (1.0 / SAMPLING_FREQ));
@@ -143,14 +143,14 @@ void fft_vu() {
 
     // ---------------- MODE MAINTENANCE/EVENT HANDLING ----------------
     // If display mode is different from the og value or mode button is pressed, end the loop
-    if (display_mode != og_display_mode){
+    if (display_mode_int != og_display_mode){
       delay(100);
       matrix->fillScreen(LED_BLACK);
       matrix->show();
       return;      
     }
     else if (digitalRead(BUTTONPIN)) {
-      display_mode++;
+      display_mode_int++;
       while(digitalRead(BUTTONPIN)){}
       delay(100);
       matrix->fillScreen(LED_BLACK);

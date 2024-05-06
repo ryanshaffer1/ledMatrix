@@ -26,8 +26,8 @@ void scroll_text() {
   // ---------------- Setup ----------------
 
   // Manage display mode
-  extern int display_mode;
-  int og_display_mode = display_mode; // Keep track of what the mode number was that entered this mode (instead of hard-coding an int)
+  extern int display_mode_int;
+  int og_display_mode = display_mode_int; // Keep track of what the mode number was that entered this mode (instead of hard-coding an int)
 
   // Display settings
   matrix->setBrightness(HIGH_BRIGHTNESS);
@@ -66,14 +66,14 @@ void scroll_text() {
     
     // ---------------- MODE MAINTENANCE/EVENT HANDLING ----------------
     // If display mode is different from the og value or mode button is pressed, end the loop
-    if (display_mode != og_display_mode){
+    if (display_mode_int != og_display_mode){
       delay(100);
       matrix->fillScreen(LED_BLACK);
       matrix->show();
       return;      
     }
     else if (digitalRead(BUTTONPIN)) {
-      display_mode++;
+      display_mode_int++;
       while(digitalRead(BUTTONPIN)){}
       delay(100);
       matrix->fillScreen(LED_BLACK);
