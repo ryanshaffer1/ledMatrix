@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+    <header>
+        <title>Ryan's LED Controller</title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <meta http-equiv="X-UA-Compatible" content="IE-edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+        <h1><li class="logo">LED</li> Control Center</h1>
+
+    </header>
+    <body id="fireworks" class="vsc-initialized">
+
+            <p>
+                <nav>
+                    <ul id = "menubuttons">
+
+                    </ul>
+                </nav>
+            </p>
+
+            <p>
+                Auto
+                <label class="switch">
+                    <input id="fireplacetoggle" type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                Manual
+            </p>
+
+            <p>
+                <form action = "/get">
+                    <input type="submit" id = "fire_mode" name="fire_mode" value="0" class="hide">
+                </form>
+            </p>
+            <p>
+                <form action = "/get" id="fire">
+                    <input type="submit" id = "StokeFire" name="StokeFire" value="Stoke Fire" disabled>
+                </form>
+            </p>
+                
+
+
+        <script src="main.js"></script>
+    </body>
+</html>

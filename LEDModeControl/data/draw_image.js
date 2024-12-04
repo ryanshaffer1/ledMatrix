@@ -77,31 +77,8 @@ function updatePixelData(){
             var pixelGreen = imageData.data[pixelStartIndex+1];
             var pixelBlue = imageData.data[pixelStartIndex+2];
 
-            /* Convert to 5/6/5 binary bit RGB */
-            var pixelRedBinary = Math.floor(pixelRed/8).toString(2);
-            var pixelGreenBinary = Math.floor(pixelGreen/4).toString(2);
-            var pixelBlueBinary = Math.floor(pixelBlue/8).toString(2);
-            
-            /* Check for correct number of bits (and add if necessary)*/
-            while (pixelRedBinary.length != 5) { 
-                pixelRedBinary = "0" + pixelRedBinary;
-            }
-            while (pixelGreenBinary.length != 6) { 
-                pixelGreenBinary = "0" + pixelGreenBinary;
-            }
-            while (pixelBlueBinary.length != 5) { 
-                pixelBlueBinary = "0" + pixelBlueBinary;
-            }
-
-            /* Append binary together*/
-            var pixelBinary = pixelRedBinary + pixelGreenBinary + pixelBlueBinary;
-
-            /* Convert to hex (must do character by character to preserve leading zeroes)*/
-            var hexChar1 = parseInt(pixelBinary.slice(0,4),2).toString(16);
-            var hexChar2 = parseInt(pixelBinary.slice(4,8),2).toString(16);
-            var hexChar3 = parseInt(pixelBinary.slice(8,12),2).toString(16);
-            var hexChar4 = parseInt(pixelBinary.slice(12,16),2).toString(16);
-            var hexPixel = "0x" + hexChar1 + hexChar2 + hexChar3 + hexChar4;
+            /* Convert to 5/6/5 binary bit RGB, written in hexadecimal */
+            var hexPixel = RGBtoHexColor(pixelRed,pixelGreen,pixelBlue);
 
             pixelDataString = pixelDataString + hexPixel + " ";
         }

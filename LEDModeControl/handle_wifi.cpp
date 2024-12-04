@@ -24,6 +24,9 @@ extern const char* password;
 extern const char* domain_name;
 extern String StationCode;
 extern String input_text;
+extern uint16_t textcolor;
+extern uint8_t text_size;
+extern int text_scroll;
 extern bool game_mode;
 extern bool fire_stoked;
 extern String image_filename;
@@ -131,6 +134,16 @@ void handle_wifi() {
     }
     request->send(SPIFFS,"/fireplace.html");
   });
+
+  // Send fireworks.html to client
+  server.on("/fireworks.html", HTTP_GET, [](AsyncWebServerRequest *request){
+    for(int i = 0; i<num_display_modes; i++){
+      if(!strcmp(display_modes[i],"firew")){
+        display_mode_int = i;
+      }
+    }
+    request->send(SPIFFS,"/fireworks.html");
+  });
   
   // Send musicvis.html to client
   server.on("/musicvis.html", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -208,6 +221,11 @@ void handle_wifi() {
     request->send(SPIFFS, "/upload_image.js", "text/javascript");
   });
 
+  // Send utility.js (helper functions) to client
+  server.on("/utility.js", HTTP_GET, [](AsyncWebServerRequest *request) {
+    request->send(SPIFFS, "/utility.js", "text/javascript");
+  });
+
 
 
   // ---------------- Input Handling ----------------
@@ -225,6 +243,10 @@ void handle_wifi() {
   // Make updates to internal variables when new Text is entered
   if (request->hasParam("FreeText")) {
     input_text = request->getParam("FreeText")->value();
+    text_size = (request->getParam("fontsize")->value()).toInt();
+    text_scroll = (request->getParam("wrapBool")->value()).toInt();
+    textcolor = (request->getParam("textcolor")->value()).toInt();
+    Serial.println(textcolor);
     request->send(SPIFFS,"/textdisplay.html");
   }
   

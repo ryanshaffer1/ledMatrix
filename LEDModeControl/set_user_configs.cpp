@@ -53,9 +53,9 @@ void set_user_configs() {
     mode_name.toCharArray(validDisplayModes[validModesCount],6); // Append to the char array of valid display modes 5-letter names
     validModesCount++;
   }
-    for (int j = 0; j < validModesCount;j++){
-      Serial.println(validDisplayModes[j]);
-    }
+//    for (int j = 0; j < validModesCount;j++){
+//      Serial.println(validDisplayModes[j]);
+//    }
 
   // Validates user-selected list of display modes
   for(int i = 0; i < num_display_modes; i++){

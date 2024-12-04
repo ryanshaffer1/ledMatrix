@@ -29,6 +29,7 @@
 #include "display_image.h"
 #include "dvd_bounce.h"
 #include "fire.h"
+#include "fireworks.h"
 #include "fft_vu.h"
 #include "metro_tracker.h"
 #include "plasma_gradient.h"
@@ -37,6 +38,7 @@
 // ---------------- Reference global variables defined elsewhere -----------------------
 extern int num_display_modes;
 extern char display_modes[][6];
+extern uint8_t text_size;
 
 // ---------------- Declare global variables ----------------
 // Define LED Matrix
@@ -50,6 +52,7 @@ FastLED_NeoMatrix *matrix = new FastLED_NeoMatrix(leds, 16, 16, mw / 16, mh / 16
 uint16_t colors[] = {matrix->Color(255, 0, 0), matrix->Color(0, 255, 0), matrix->Color(0, 0, 255), matrix->Color(255, 255, 255) }; // Red, Green, Blue, White
 uint16_t secondary_colors[] = {matrix->Color(255, 100, 0), matrix->Color(0, 255, 100), matrix->Color(200, 0, 255), matrix->Color(127, 127, 127) };
 uint16_t tertiary_colors[] = {matrix->Color(255, 200, 0), matrix->Color(255, 255, 255), matrix->Color(255, 127, 127), matrix->Color(68, 68, 68) };
+uint16_t textcolor = {matrix->Color(255, 255, 255)};
 
 // Helper files in ESP32 memory
 String image_filename = "/image.txt";
@@ -121,6 +124,9 @@ void loop() {
   }
   else if (!strcmp(display_mode_char,"bounc")){
     dvd_bounce();
+  }
+  else if (!strcmp(display_mode_char,"firew")){
+    fireworks();
   }
 
 }

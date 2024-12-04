@@ -20,12 +20,35 @@
 
             <p>
                 <form action="/get" class="textselector">
-                    Text to Display: <input type="text" name="FreeText" id="FreeText" value = "" required >
-                    <input type="submit" value="Display" id="textSubmit">
+                    <div>Text to Display: <input type="text" name="FreeText" id="FreeText" value = "" required >
+                    <input type="submit" value="Display" id="textSubmit"></div>
+                    <div id="text-toolbar">
+                        <li><label for="textcolorPicker">Text Color</label>
+                            <input id="textcolorPicker" name="textcolorPicker" type="color" value="#ffffff"></li>
+                        <li class="hide"><input type="text" name="textcolor" id="textcolor" value="65535"></li>
+                        <li><label for="fontsize">Font Size</label>
+                            <select id="fontsize" name="fontsize">
+                                <option value = "1">Small</option>
+                                <option value = "2">Medium</option>
+                                <option value = "3">Large</option>
+                                <option value = "4">XL</option>
+                            </select></li>
+                        <li><div id = "wrapslider">
+                            <p>Scroll</p>
+                            <label class="switch">
+                                <input id="texttoggle" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                            <p>Wrap</p></div></li>
+                        <li class="hide"><input type="text" name="wrapBool" id="wrapBool" value = "0"></li>
+                    </div>
                 </form><br>
             </p>
 
+            
+
 
         <script src="main.js"></script>
+        <script src="utility.js"></script>
     </body>
 </html>

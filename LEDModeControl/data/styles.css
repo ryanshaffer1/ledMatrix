@@ -156,6 +156,22 @@ div{
     align-items: center;
 }
 
+#text-toolbar{
+    display: inline-block;
+}
+#text-toolbar li{
+  padding:10px;
+  list-style-type: none;
+  vertical-align: bottom;
+}
+#wrapslider *{
+  display: table-cell;
+  vertical-align: middle;
+}
+#wrapslider p{
+  padding: 5px;
+}
+
 /* SWITCH */
 .switch {
     position: relative;

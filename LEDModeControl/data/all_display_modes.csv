@@ -1,0 +1,10 @@
+﻿Mode Number,5-Letter Mode Name,Webpage Display Name,cpp File Name (DO NOT INCLUDE .cpp),html File Name
+0,clock,Time & Weather,clock_display,clock.html
+1,metro,Metro Tracker,metro_tracker,metrotracker.html
+2,text_,Text Display,scroll_text,textdisplay.html
+3,firep,Fireplace,fire,fireplace.html
+4,music,Music Vis,fft_vu,musicvis.html
+5,image,Image Display,display_image,imagedisplay.html
+6,groov,Groovy,plasma_gradient,groovy.html
+7,bounc,DVD Bounce,dvd_bounce,dvdbounce.html
+8,firew,Fireworks,fireworks,fireworks.html

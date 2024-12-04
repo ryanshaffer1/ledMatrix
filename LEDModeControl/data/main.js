@@ -35,7 +35,7 @@ fetch("userConfig.txt")
 }
 
 // Arrange menu buttons in order
-function setMenu(modes,modesDict){
+async function setMenu(modes,modesDict){
   menuUL = document.getElementById("menubuttons");
   for (let i = 0; i < modes.length; i++){
     let modeName = modes[i].substring(0,5);
@@ -60,17 +60,6 @@ function menuFunction(x) {
   
   document.getElementById('myDropdown').style.display = document.getElementById('myDropdown').style.display =='block' ?   'none' : 'block';
 }
-
-// HELPER FUNCTIONS/INFO
-// Color conversions for data transfer
-function hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
-    } : null;
-  }
 
 // Metro Station Database
 // const metroStations = [['A01','Metro Center'],['A02','Farragut North'],['A03','Dupont Circle'],['A04','Woodley Park-Zoo/Adams Morgan']];
@@ -100,6 +89,21 @@ if(document.body.id=='textdisplay'){
       textToSubmit = textToSubmit.replace("'","/'");
       textToSubmit = textToSubmit.replace('"',"&quot");
       document.getElementById("FreeText").value = textToSubmit;    
+  });
+  document.getElementById("texttoggle").addEventListener('click',(e)=>{
+      var wrapChecked = document.getElementById("texttoggle").checked;
+      document.getElementById("wrapBool").value = (+ wrapChecked).toString();
+  });
+  document.getElementById("textcolorPicker").addEventListener('change',(e)=>{
+      var color = document.getElementById("textcolorPicker").value;
+      var red = parseInt(color.substring(1,3),16);
+      var green = parseInt(color.substring(3,5),16);
+      var blue = parseInt(color.substring(5,7),16);
+      var hexColor = RGBtoHexColor(red,green,blue);
+      // In this case, we can make do with a decimal number (not hex)
+      var decColor = parseInt(hexColor.substring(2),16);
+
+      document.getElementById("textcolor").value = decColor;
   });
 }
 
@@ -146,18 +150,7 @@ if(document.body.id=='fireplace'){
 
 // IMAGEDISPLAY Functions
 if(document.body.id=='imagedisplay'){
-  // OBE: color conversions and data handling for fullscreen color
-  // document.getElementById("Fullscreen Color").addEventListener('change', (e) => {
-  //     var color = e.target.value;
-  //     var red = hexToRgb(color).r;
-  //     var green = hexToRgb(color).g;
-  //     var blue = hexToRgb(color).b;
-  //     document.getElementById("ColorDisp Red").value = red;
-  //     document.getElementById("ColorDisp Green").value = green;
-  //     document.getElementById("ColorDisp Blue").value = blue;
-  // });
-
-  // Change between drawing images and uploading images
+   // Change between drawing images and uploading images
   document.getElementById("imagetoggle").addEventListener('change',(e)=>{
     if(document.getElementById("imagetoggle").checked){
       document.getElementById("drawing-elements").classList.add("hide");

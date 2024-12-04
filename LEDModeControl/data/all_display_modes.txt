@@ -7,3 +7,4 @@ Mode Number	5-Letter Mode Name	Webpage Display Name	cpp File Name (DO NOT INCLUD
 5	image	Image Display	display_image	imagedisplay.html
 6	groov	Groovy	plasma_gradient	groovy.html
 7	bounc	DVD Bounce	dvd_bounce	dvdbounce.html
+8	firew	Fireworks	fireworks	fireworks.html
