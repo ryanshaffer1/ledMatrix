@@ -57,9 +57,9 @@ async function setMenu(modes,modesDict){
 // OPTIONS MENU
 function menuFunction(x) {
   x.classList.toggle("change");
-  
   document.getElementById('myDropdown').style.display = document.getElementById('myDropdown').style.display =='block' ?   'none' : 'block';
 }
+
 
 // Metro Station Database
 // const metroStations = [['A01','Metro Center'],['A02','Farragut North'],['A03','Dupont Circle'],['A04','Woodley Park-Zoo/Adams Morgan']];
@@ -161,4 +161,28 @@ if(document.body.id=='imagedisplay'){
       document.getElementById("imageupload-elements").classList.add("hide");
     }
   });
+  // List all files in /saved_images folder
+  fetch("savedImages.txt")
+    .then(res => res.text())
+    .then(text => {
+      let images = text.split('\n');
+      createImageList(images);
+        });
+  }
+
+// Arrange menu buttons in order
+function createImageList(images){
+  const ul = document.getElementById("savedImagesList");
+  for (let i = 0; i < images.length; i++){
+    let imageName = images[i];
+    li = document.createElement("li");
+    button = document.createElement("button");
+    button.textContent = imageName;
+    button.classList.add("saved_image_name");
+    button.addEventListener("click", e => {
+      document.getElementById("LoadImageName").value = imageName;
+    })
+    li.appendChild(button);
+    ul.appendChild(li);  
+  }
 }

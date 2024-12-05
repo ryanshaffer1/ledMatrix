@@ -13,6 +13,10 @@
 #include <SPIFFS.h>
 //#include <FastLED_NeoMatrix.h>
 
+// Other headers within the project that are used in this file
+#include "save_current_image.h"
+#include "load_image.h"
+
 // Don't know what this does, but let's do it anyway
 #ifndef PSTR
  #define PSTR // Make Arduino Due happy
@@ -30,6 +34,9 @@ extern int text_scroll;
 extern bool game_mode;
 extern bool fire_stoked;
 extern String image_filename;
+extern String default_image_filename;
+extern String save_image_filename;
+extern String load_image_filename;
 extern bool updateImage;
 extern int display_mode_int;
 extern char display_modes[][6];
@@ -196,6 +203,11 @@ void handle_wifi() {
     request->send(SPIFFS, "/userConfig.txt", "text/plain");
   });
 
+  // savedImages.txt (list of images saved) to client
+  server.on("/savedImages.txt", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/savedImages.txt", "text/plain");
+  });
+
   // all_display_modes.txt (list of valid display modes) to client
   server.on("/all_display_modes.txt", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "/all_display_modes.txt", "text/plain");
@@ -279,6 +291,32 @@ void handle_wifi() {
     imageFile.close();
     updateImage = 1;
     request->send(SPIFFS,"/imagedisplay.html");
+  }
+  // Make updates to internal variables when user resets image to default
+  if (request->hasParam("ResetDefaultImage")){
+    Serial.println("Resetting Image to Default");
+    load_image_filename = default_image_filename;
+    load_image();
+    updateImage = 1;
+    request->send(SPIFFS,"/imagedisplay.html");  
+  }
+
+  // Make updates to internal variables when user saves currently-displayed image
+  if (request->hasParam("SaveImageName")){
+    Serial.println("Saving Image");
+    save_image_filename = request->getParam("SaveImageName")->value();
+    save_current_image();
+    request->send(SPIFFS,"/imagedisplay.html");  
+  }
+
+  // Make updates to internal variables when user loads a previously-saved image
+  if (request->hasParam("LoadImageName")){
+    Serial.println("LoadImageName");
+    load_image_filename = "/saved_images/" + request->getParam("LoadImageName")->value() + ".txt";
+    load_image();
+    updateImage = 1;
+    Serial.println(request->getParam("LoadImageName")->value());
+    request->send(SPIFFS,"/imagedisplay.html");  
   }
   
   });

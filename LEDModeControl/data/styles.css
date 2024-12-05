@@ -59,6 +59,8 @@ header li{
   height: 5px;
   background-color: #333;
   margin: 6px 0;
+  margin-left: auto;
+  margin-right: auto;
   transition: 0.4s;
 }
 
@@ -170,6 +172,19 @@ div{
 }
 #wrapslider p{
   padding: 5px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+/* Saved Image File Names */
+.saved_image_name{
+  background: none;
+	color: gray;
+	border: none;
+	padding: 0;
+	cursor: pointer;
 }
 
 /* SWITCH */

@@ -51,6 +51,36 @@
                 </form>
             </div>
 
+            <div id="imagetools">
+                <p>Image Options:</p>
+                <div class="container" onclick="menuFunction(this)">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+                <div id="myDropdown" class="dropdown-content" style="display:none">
+                    <a>
+                        <form action="/get" id="ImageTools">
+                            <input type="submit" id = "ResetDefaultImage" name="ResetDefaultImage" value="Reset to Default">
+                        </form>
+                    </a>
+                    <a>
+                        <form action="/get" id="SaveImage">
+                            <input type="text" name="SaveImageName" id="SaveImageName" placeholder="Enter Image Name">
+                            <input type="submit" value="Save Current Image">
+                        </form>
+                    </a>
+                    <a>
+                        <form action="/get" id="LoadImage">
+                            <ul id="savedImagesList"> Saved Images (Click to Load):
+                                <li class="hide">
+                                    <input type="text" name="LoadImageName" id="LoadImageName">
+                                </li>
+                            </ul>
+                        </form>
+                    </a>
+
+            </div>
 
         <script src="main.js"></script>
         <script src="draw_image.js"></script>

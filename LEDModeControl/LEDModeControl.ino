@@ -21,8 +21,9 @@
 
 // Include helper files
 #include "handle_wifi.h"
-#include "reset_default_image.h"
 #include "set_user_configs.h"
+#include "save_current_image.h"
+#include "load_image.h"
 
 // Include display mode files
 #include "clock_display.h"
@@ -55,9 +56,13 @@ uint16_t tertiary_colors[] = {matrix->Color(255, 200, 0), matrix->Color(255, 255
 uint16_t textcolor = {matrix->Color(255, 255, 255)};
 
 // Helper files in ESP32 memory
+extern String default_image_filename;
 String image_filename = "/image.txt";
 String user_config_filename = "/userConfig.txt";
 String valid_display_modes_filename = "/all_display_modes.txt";
+String saved_images_list_filename = "/savedImages.txt";
+String save_image_filename; // This is defined by the user
+String load_image_filename = default_image_filename; // Start with default image
 
 //Settings for the initial run case and various mode information
 int display_mode_int = 0;
@@ -78,7 +83,7 @@ void setup() {
   Serial.begin(115200);
   
   // Set default files and config files
-  reset_default_image();
+  load_image();
   set_user_configs();
   
   
